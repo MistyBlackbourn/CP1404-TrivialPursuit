@@ -4,23 +4,87 @@ from random import choice
 
 def main():
     questions = load_questions()
-    for i in range(10):
+
+    user_choice = ""
+    while user_choice != "Q":
+        print("P - Play Game",
+              "A - Add Question",
+              "Q - Quit",
+              sep="\n"
+              )
+        user_choice = input(">>> ").upper()
+        if user_choice == "P":
+            play_game(questions)
+        elif user_choice == "A":
+            add_question(questions)
+            pass
+        elif user_choice == "Q":
+            save_questions(questions)
+            print("Farewell wizard")
+        else:
+            print("WRONG MENU CHOICE")
+
+
+def add_question(questions):
+    new_question = []
+
+    print("Wizard what is your question?")
+    user_question = input(">>> ")
+    while user_question == "":
+        print("Don't be shy, what is your question?")
+        user_question = input(">>> ")
+    new_question.append(user_question)
+
+    print("Wizard what is the truth of your question?")
+    three_answers = 0
+    user_answer = input(">>> ")
+    while three_answers < 3:
+        while user_answer == "":
+            print("I NEED ANSWERS!!!!")
+            user_answer = input(">>> ")
+        three_answers += 1
+        new_question.append(user_answer)
+        #---fix this memes
+
+    print("Wizard what is your category?")
+    user_category = input(">>> ")
+    while user_category == "":
+        print("Don't be shy, what is your category?")
+        user_category = input(">>> ")
+    new_question.append(user_category)
+
+    questions.append(new_question)
+
+def save_questions(questions):
+    question_file = open("Questions", mode="w")
+    for question in questions:
+        question_line =",".join(question)
+        question_file.write(question_line + "\n")
+    question_file.close()
+
+
+
+def play_game(questions):
+    points = 0
+    while points < 10:
         category = get_random_category()
         question = get_question(category, questions)
         shuffled_options = get_shuffled_options(question)
         user_answer = ask_question(question, shuffled_options)
-        is_correct_answer(question[1], user_answer)
+        points += is_correct_answer(question[1], user_answer)
 
 
 def is_correct_answer(answer, user_answer):
     if user_answer != answer:
         print("Incorrect")
+        return 0
     else:
         print("Correct")
+        return 1
 
 
 def ask_question(question, answers):
-    print("{}?\nA){}\nB){}\nC){}".format(question, answers[0], answers[1], answers[2]))
+    print("{}?\nA){}\nB){}\nC){}".format(question[0], answers[0], answers[1], answers[2]))
     user_answer = ""
     while user_answer != "A" and user_answer != "B" and user_answer != "C":
         user_answer = input(">>>>")
