@@ -35,16 +35,17 @@ def add_question(questions):
         user_question = input(">>> ")
     new_question.append(user_question)
 
-    print("Wizard what is the truth of your question?")
+    print("Wizard, what is the truth of your question?")
     three_answers = 0
-    user_answer = input(">>> ")
     while three_answers < 3:
+        user_answer = input(">>> ")
         while user_answer == "":
             print("I NEED ANSWERS!!!!")
             user_answer = input(">>> ")
         three_answers += 1
+        if three_answers < 3:
+            print("What is the #{} lie of your question?".format(three_answers))
         new_question.append(user_answer)
-        #---fix this memes
 
     print("Wizard what is your category?")
     user_category = input(">>> ")
@@ -55,13 +56,13 @@ def add_question(questions):
 
     questions.append(new_question)
 
+
 def save_questions(questions):
     question_file = open("Questions", mode="w")
     for question in questions:
-        question_line =",".join(question)
+        question_line = ",".join(question)
         question_file.write(question_line + "\n")
     question_file.close()
-
 
 
 def play_game(questions):
