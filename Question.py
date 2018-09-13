@@ -31,3 +31,6 @@ class Question:
             return options[1]
         else:
             return options[2]
+
+    def save_to_list(self):
+        return [self.question, self.answer, self.wrong_answer_1, self.wrong_answer_2, self.category]
