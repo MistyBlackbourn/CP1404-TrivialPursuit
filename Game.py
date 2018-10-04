@@ -18,9 +18,8 @@ class Game:
         chosen_category = choice(self.categories)
         return chosen_category
 
-    def get_question(self):
+    def get_question(self, category):
         category_questions = []
-        category = self.get_random_category()
         for question in self.questions:
             if category == question.category:
                 category_questions.append(question)

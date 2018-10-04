@@ -28,21 +28,33 @@ BoxLayout:
                 text: "Add"
         BoxLayout:
             orientation: 'vertical'
+            Button:
+                background_normal: ""
+                background_color: (1,0,0.5,1)
+                text: "Roll the Category Dice."
+                on_press: app.handle_category_press()
             Label:
                 color: (1,0,0.5,1)
-                text: "What creature is Scabbers?"
+                id: category_label
+                text: "Category:"
+            Label:
+                color: (1,0,0.5,1)
+                text: app.question
             Button:
                 background_normal: ""
                 background_color: (1,0,0.5,1)
-                text: "Owl"
+                on_press: app.handle_answer_press(app.answer_a)
+                text: app.answer_a
             Button:
                 background_normal: ""
                 background_color: (1,0,0.5,1)
-                text: "Cat"
+                on_press: app.handle_answer_press(app.answer_b)
+                text: app.answer_b
             Button:
                 background_normal: ""
                 background_color: (1,0,0.5,1)
-                text: "Rat"
+                on_press: app.handle_answer_press(app.answer_c)
+                text: app.answer_c
             Label:
                 color: (1,0,0.5,1)
                 text: "Score >9000"
