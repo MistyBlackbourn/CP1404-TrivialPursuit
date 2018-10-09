@@ -6,6 +6,7 @@ class Game:
         self.questions = questions
         self.categories = categories
         self.score = 0
+        self.current_question = ""
 
     def play_game(self):
         while self.score < 5:

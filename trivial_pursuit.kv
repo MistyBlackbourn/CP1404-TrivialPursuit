@@ -7,25 +7,32 @@ BoxLayout:
             Label:
                 color: (1,0,0.5,1)
                 text: "Add A Question"
-            Label:
+            TextInput:
                 color: (1,0,0.5,1)
+                id: question
                 text: "Question:"
-            Label:
+            TextInput:
                 color: (1,0,0.5,1)
+                id: answer
                 text: "Answer"
-            Label:
-                color: (1,0,0.5,1)
+            TextInput:
+                color: (1,0,0.5,1),
+                id: lie_1
                 text: "Lie 1"
-            Label:
+            TextInput:
                 color: (1,0,0.5,1)
+                id: lie_2
                 text: "Lie 2"
-            Label:
-                color: (1,0,0.5,1)
+            Spinner:
+                color: (1,1,1,1)
+                id: category
                 text: "Category"
+                values: ("The Dark Arts", "Magical People", "Magical Objects", "Hogwarts", "Animals & Magical Creatures", "Magical Spells & Potions")
             Button:
                 background_normal: ""
                 background_color: (1,0,0.5,1)
                 text: "Add"
+                on_press: app.add_question(question.text, answer.text, lie_1.text, lie_2.text, category.text)
         BoxLayout:
             orientation: 'vertical'
             Button:
@@ -57,8 +64,8 @@ BoxLayout:
                 text: app.answer_c
             Label:
                 color: (1,0,0.5,1)
-                text: "Score >9000"
+                text: app.score
     Label:
         color: (1,0,0.5,1)
-        text: "Status"
+        text: app.status
         size_hint_y: 0.33
