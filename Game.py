@@ -1,4 +1,5 @@
 from random import choice
+from operator import attrgetter
 
 
 class Game:
@@ -26,3 +27,8 @@ class Game:
                 category_questions.append(question)
         chosen_question = choice(category_questions)
         return chosen_question
+
+
+    def sort_questions(self, attribute_to_sort_by):
+        self.questions.sort(key=attrgetter(attribute_to_sort_by))
+

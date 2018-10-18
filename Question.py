@@ -1,6 +1,5 @@
 from random import shuffle
 
-
 class Question:
     def __init__(self, question, answer, wrong_answer_1, wrong_answer_2, category):
         self.question = question

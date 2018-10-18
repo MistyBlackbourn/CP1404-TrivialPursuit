@@ -11,18 +11,26 @@ BoxLayout:
                 color: (1,0,0.5,1)
                 id: question
                 text: "Question:"
+                multiline: False
+                write_tab: False
             TextInput:
                 color: (1,0,0.5,1)
                 id: answer
                 text: "Answer"
+                multiline: False
+                write_tab: False
             TextInput:
                 color: (1,0,0.5,1),
                 id: lie_1
                 text: "Lie 1"
+                multiline: False
+                write_tab: False
             TextInput:
                 color: (1,0,0.5,1)
                 id: lie_2
                 text: "Lie 2"
+                multiline: False
+                write_tab: False
             Spinner:
                 color: (1,1,1,1)
                 id: category
@@ -33,6 +41,11 @@ BoxLayout:
                 background_color: (1,0,0.5,1)
                 text: "Add"
                 on_press: app.add_question(question.text, answer.text, lie_1.text, lie_2.text, category.text)
+            Button:
+                background_normal: ""
+                background_color: (1,0,0.5,1)
+                text: "Clear"
+                on_press: app.clear_form()
         BoxLayout:
             orientation: 'vertical'
             Button:

@@ -17,10 +17,11 @@ class TrivialPursuitApp(App):
     def __init__(self):
         super(TrivialPursuitApp, self).__init__()
         questions = load_questions()
-        # self.game = Game(questions, ["The Dark Arts", "Magical People", "Magical Objects", "Hogwarts",
-        #                              "Animals & Magical Creatures",
-        #                              "Magical Spells & Potions"])
-        self.game = Game(questions, ["Magical People"])
+        self.game = Game(questions, ["The Dark Arts", "Magical People", "Magical Objects", "Hogwarts",
+                                     "Animals & Magical Creatures",
+                                     "Magical Spells & Potions"])
+
+        self.game.sort_questions("category")
 
     def build(self):
         self.title = "Harry Potter Trivial Pursuit"
@@ -61,7 +62,6 @@ class TrivialPursuitApp(App):
             self.status = "Don't be shy, what is your question?"
         new_question.append(user_question)
 
-
         if answer == "":
             self.status = "I NEED ANSWERS!!!!"
         new_question.append(answer)
@@ -78,17 +78,24 @@ class TrivialPursuitApp(App):
 
         question = Question(new_question[0], new_question[1], new_question[2], new_question[3], new_question[4])
         self.game.questions.append(question)
+        self.clear_form()
+
+    def clear_form(self):
+        self.root.ids.question.text = ""
+        self.root.ids.answer.text = ""
+        self.root.ids.lie_1.text = ""
+        self.root.ids.lie_2.text = ""
+        self.root.ids.category.text = "Category"
+
+    def on_stop(self):
+        question_file = open("Questions", mode="w")
+        for question in self.game.questions:
+            question_line = ",".join(question.save_to_list())
+            question_file.write(question_line + "\n")
+        question_file.close()
+        super(TrivialPursuitApp, self).on_stop()
 
 
-#
-# def save_questions(questions):
-#     question_file = open("Questions", mode="w")
-#     for question in questions:
-#         question_line = ",".join(question.save_to_list())
-#         question_file.write(question_line + "\n")
-#     question_file.close()
-#
-#
 def load_questions():
     questions = []
     question_file = open("Questions", "r")
